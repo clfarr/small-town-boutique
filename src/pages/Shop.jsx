@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { products, categories, ageGroups } from '../data/products';
 
@@ -47,14 +47,7 @@ const Shop = ({ onAddToCart }) => {
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* Filters Sidebar */}
-          <AnimatePresence>
-            {(showFilters || window.innerWidth >= 768) && (
-              <motion.aside
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="w-full md:w-64 space-y-6"
-              >
+          <aside className={`w-full md:w-64 space-y-6 ${showFilters ? 'block' : 'hidden md:block'}`}>
                 {/* Category Filter */}
                 <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-6 shadow-lg">
                   <h3 className="font-display text-2xl text-sand-600 mb-4">Category</h3>
@@ -97,9 +90,7 @@ const Shop = ({ onAddToCart }) => {
                     ))}
                   </div>
                 </div>
-              </motion.aside>
-            )}
-          </AnimatePresence>
+          </aside>
 
           {/* Products Grid */}
           <div className="flex-1">
