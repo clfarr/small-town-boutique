@@ -143,22 +143,20 @@ const Home = () => {
                 className="group cursor-pointer"
               >
                 <Link to={`/product/${product.id}`}>
-                  <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blush-100 to-lavender-100 aspect-square mb-4 shadow-lg group-hover:shadow-2xl transition-shadow">
-                    {/* Placeholder for product image */}
-                    <div className="w-full h-full flex items-center justify-center">
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="text-8xl"
-                      >
-                        {['🌸', '🌙', '🦋', '🌻'][index]}
-                      </motion.div>
-                    </div>
+                  <div className="relative overflow-hidden rounded-3xl aspect-square mb-4 shadow-lg group-hover:shadow-2xl transition-shadow">
+                    <motion.img
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
                     {/* Shimmer effect on hover */}
                     <motion.div
                       initial={{ x: '-200%' }}
                       whileHover={{ x: '200%' }}
                       transition={{ duration: 0.6 }}
-                      className="absolute inset-0 shimmer-bg animate-shimmer"
+                      className="absolute inset-0 shimmer-bg"
                     />
                   </div>
                   <h3 className="font-display text-2xl text-sand-600 mb-2 group-hover:text-dusty-rose-500 transition-colors">

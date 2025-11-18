@@ -72,8 +72,12 @@ const Cart = ({ cartItems, onUpdateQuantity, onRemoveItem }) => {
                 >
                   <div className="flex flex-col sm:flex-row gap-6">
                     {/* Product Image */}
-                    <div className="w-full sm:w-32 h-32 bg-gradient-to-br from-blush-100 to-lavender-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                      <span className="text-5xl">✨</span>
+                    <div className="w-full sm:w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
 
                     {/* Product Info */}

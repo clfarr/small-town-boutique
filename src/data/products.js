@@ -10,7 +10,7 @@ export const products = [
     sizes: ["0-3M", "3-6M", "6-12M"],
     inStock: true,
     featured: true,
-    image: "wildflower-romper"
+    image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&h=800&fit=crop"
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const products = [
     sizes: ["12-18M", "18-24M", "2T", "3T"],
     inStock: true,
     featured: true,
-    image: "moonbeam-dress"
+    image: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=800&h=800&fit=crop"
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ export const products = [
     sizes: ["0-3M", "3-6M", "6-12M"],
     inStock: true,
     featured: false,
-    image: "bloomer-set"
+    image: "https://images.unsplash.com/photo-1522771930-78848d9293e8?w=800&h=800&fit=crop"
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ export const products = [
     sizes: ["12-18M", "18-24M", "2T", "3T", "4T"],
     inStock: true,
     featured: true,
-    image: "sunset-overalls"
+    image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&h=800&fit=crop"
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ export const products = [
     sizes: ["0-3M", "3-6M", "6-12M", "12-18M"],
     inStock: true,
     featured: false,
-    image: "butterfly-onesie"
+    image: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=800&h=800&fit=crop"
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ export const products = [
     sizes: ["2T", "3T", "4T", "5T"],
     inStock: true,
     featured: false,
-    image: "prairie-skirt"
+    image: "https://images.unsplash.com/photo-1503944168849-5c8be6eb29b6?w=800&h=800&fit=crop"
   },
   {
     id: 7,
@@ -88,7 +88,7 @@ export const products = [
     sizes: ["0-6M", "6-12M"],
     inStock: true,
     featured: false,
-    image: "sleep-sack"
+    image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&h=800&fit=crop"
   },
   {
     id: 8,
@@ -101,7 +101,7 @@ export const products = [
     sizes: ["18-24M", "2T", "3T", "4T"],
     inStock: true,
     featured: true,
-    image: "garden-dress"
+    image: "https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?w=800&h=800&fit=crop"
   },
   {
     id: 9,
@@ -114,7 +114,7 @@ export const products = [
     sizes: ["2T", "3T", "4T", "5T"],
     inStock: true,
     featured: false,
-    image: "linen-pants"
+    image: "https://images.unsplash.com/photo-1514090458221-6e4fd93cd490?w=800&h=800&fit=crop"
   },
   {
     id: 10,
@@ -127,7 +127,7 @@ export const products = [
     sizes: ["0-3M", "3-6M", "6-12M"],
     inStock: true,
     featured: false,
-    image: "kimono-set"
+    image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=800&h=800&fit=crop"
   },
   {
     id: 11,
@@ -140,7 +140,7 @@ export const products = [
     sizes: ["12-18M", "18-24M", "2T", "3T", "4T"],
     inStock: false,
     featured: false,
-    image: "clover-cardigan"
+    image: "https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=800&h=800&fit=crop"
   },
   {
     id: 12,
@@ -153,7 +153,7 @@ export const products = [
     sizes: ["2T", "3T", "4T", "5T"],
     inStock: true,
     featured: false,
-    image: "spirit-tunic"
+    image: "https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?w=800&h=800&fit=crop"
   }
 ];
 

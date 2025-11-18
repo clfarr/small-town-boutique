@@ -14,18 +14,6 @@ const Shop = ({ onAddToCart }) => {
     return categoryMatch && ageMatch;
   });
 
-  const productIcons = {
-    'rompers': '🌸',
-    'dresses': '🌙',
-    'sets': '🍃',
-    'overalls': '🌾',
-    'onesies': '🦋',
-    'bottoms': '🌻',
-    'tops': '☀️',
-    'sleepwear': '⭐',
-    'outerwear': '🌿'
-  };
-
   return (
     <div className="min-h-screen py-12 bg-gradient-to-b from-cream-50 to-sand-50">
       {/* Decorative elements */}
@@ -137,13 +125,14 @@ const Shop = ({ onAddToCart }) => {
                   >
                     <div className="bg-white/70 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-shadow">
                       {/* Product Image */}
-                      <div className="relative aspect-square bg-gradient-to-br from-blush-100 via-lavender-100 to-sage-100 flex items-center justify-center overflow-hidden">
-                        <motion.div
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          className="text-8xl"
-                        >
-                          {productIcons[product.category] || '✨'}
-                        </motion.div>
+                      <div className="relative aspect-square overflow-hidden">
+                        <motion.img
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.3 }}
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                        />
                         {!product.inStock && (
                           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                             <span className="bg-white px-4 py-2 rounded-full font-semibold text-sand-600">
