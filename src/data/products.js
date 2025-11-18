@@ -154,6 +154,58 @@ export const products = [
     inStock: true,
     featured: false,
     image: "/images/products/spirit-tunic.jpg"
+  },
+  {
+    id: 13,
+    name: "Sunshine Flutter Tee",
+    category: "tops",
+    ageGroup: "toddler",
+    price: 28.00,
+    description: "Soft cotton tee with flutter sleeves and sunshine embroidery. Perfect for layering or wearing alone.",
+    colors: ["cream", "blush", "lavender"],
+    sizes: ["12-18M", "18-24M", "2T", "3T", "4T", "5T"],
+    inStock: true,
+    featured: false,
+    image: "/images/products/flutter-tee.jpg"
+  },
+  {
+    id: 14,
+    name: "Wildflower Henley",
+    category: "tops",
+    ageGroup: "toddler",
+    price: 32.00,
+    description: "Long-sleeve henley with delicate wildflower print. Wooden buttons and ribbed cuffs.",
+    colors: ["sage", "dusty-rose", "sand"],
+    sizes: ["12-18M", "18-24M", "2T", "3T", "4T"],
+    inStock: true,
+    featured: false,
+    image: "/images/products/wildflower-henley.jpg"
+  },
+  {
+    id: 15,
+    name: "Boho Lace Tank",
+    category: "tops",
+    ageGroup: "toddler",
+    price: 26.00,
+    description: "Lightweight cotton tank with vintage lace trim. Ideal for warm summer days.",
+    colors: ["cream", "blush"],
+    sizes: ["2T", "3T", "4T", "5T"],
+    inStock: true,
+    featured: false,
+    image: "/images/products/lace-tank.jpg"
+  },
+  {
+    id: 16,
+    name: "Daisy Ruffle Blouse",
+    category: "tops",
+    ageGroup: "toddler",
+    price: 35.00,
+    description: "Flowing blouse with ruffled collar and delicate daisy embroidery. Made from organic cotton.",
+    colors: ["lavender", "cream", "sage"],
+    sizes: ["18-24M", "2T", "3T", "4T", "5T"],
+    inStock: true,
+    featured: true,
+    image: "/images/products/daisy-blouse.jpg"
   }
 ];
 
