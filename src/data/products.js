@@ -144,13 +144,13 @@ export const products = [
   },
   {
     id: 12,
-    name: "Free Spirit Tunic",
-    category: "tops",
+    name: "Lace Tunic & Floral Legging Set",
+    category: "sets",
     ageGroup: "toddler",
     price: 38.00,
-    description: "Oversized tunic with tassel details and geometric print.",
-    colors: ["terracotta", "sand"],
-    sizes: ["2T", "3T", "4T", "5T"],
+    description: "Our lace drawstring tunic and floral legging set turns any occasion into a special one! Casual comfort meets chic Fall fashion for little girls. Buttery-soft fabric for all-day comfort. Flattering, fashionable, and fun for playdates. Perfect for fall, birthday parties, pageants, photos, and year-round cuteness. Long-sleeve Lima-style lace tunic with adjustable front drawstrings, and floral print leggings.",
+    colors: ["blush", "sage", "cream"],
+    sizes: ["2T/3T", "4T/5T", "6Y/7Y", "8Y/9Y", "10Y/12Y"],
     inStock: true,
     featured: false,
     image: "https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?w=800&h=800&fit=crop"
