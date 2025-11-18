@@ -64,8 +64,22 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-cream-50">
-        <Navigation cartCount={totalItems} />
+      <div className="min-h-screen bg-cream-50 relative overflow-hidden">
+        {/* Decorative Backdrop */}
+        <div className="fixed inset-0 pointer-events-none z-0">
+          {/* Soft gradient blobs */}
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-lavender-200/30 to-blush-200/30 rounded-full blur-3xl animate-blob" />
+          <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-gradient-to-br from-sage-200/30 to-sand-200/30 rounded-full blur-3xl animate-blob animation-delay-2000" />
+          <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-gradient-to-br from-dusty-rose-200/30 to-lavender-200/30 rounded-full blur-3xl animate-blob animation-delay-4000" />
+
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }} />
+        </div>
+
+        <div className="relative z-10">
+          <Navigation cartCount={totalItems} />
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -85,10 +99,10 @@ function App() {
               />
             }
           />
-        </Routes>
+          </Routes>
 
-        {/* Footer */}
-        <footer className="bg-gradient-to-br from-sand-100 via-blush-100 to-lavender-100 py-16 mt-20">
+          {/* Footer */}
+          <footer className="bg-gradient-to-br from-sand-100 via-blush-100 to-lavender-100 py-16 mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
               {/* Brand */}
@@ -140,7 +154,8 @@ function App() {
               <p className="mt-2">A portfolio project by Carrie Farr</p>
             </div>
           </div>
-        </footer>
+          </footer>
+        </div>
       </div>
     </Router>
   );
