@@ -37,12 +37,12 @@ const Shop = ({ onAddToCart, onToggleFavorite, isFavorite }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h1 className="font-display text-6xl md:text-7xl text-gradient mb-4">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl text-gradient mb-4">
             Our Collection
           </h1>
-          <p className="text-lg text-sand-500">
+          <p className="text-base sm:text-lg text-sand-500">
             {filteredProducts.length} {filteredProducts.length === 1 ? 'item' : 'items'} available
           </p>
         </motion.div>
@@ -150,10 +150,10 @@ const Shop = ({ onAddToCart, onToggleFavorite, isFavorite }) => {
                             e.stopPropagation();
                             onToggleFavorite(product);
                           }}
-                          className="absolute top-4 right-4 z-20 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+                          className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 p-2 sm:p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                           title={isFavorite(product.id) ? "Remove from favorites" : "Add to favorites"}
                         >
-                          <span className="text-2xl">
+                          <span className="text-xl sm:text-2xl">
                             {isFavorite(product.id) ? '❤️' : '🤍'}
                           </span>
                         </motion.button>

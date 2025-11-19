@@ -36,10 +36,10 @@ const Navigation = ({ cartCount = 0 }) => {
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-sage-300 rounded-full animate-float" />
               </motion.div>
               <div>
-                <h1 className="font-script text-3xl text-dusty-rose-500 group-hover:text-dusty-rose-600 transition-colors">
+                <h1 className="font-script text-2xl sm:text-3xl text-dusty-rose-500 group-hover:text-dusty-rose-600 transition-colors">
                   Luna & Clover
                 </h1>
-                <p className="text-xs text-sage-500 font-light tracking-widest">BOHO KIDS</p>
+                <p className="text-xs text-sage-500 font-light tracking-widest hidden sm:block">BOHO KIDS</p>
               </div>
             </Link>
 

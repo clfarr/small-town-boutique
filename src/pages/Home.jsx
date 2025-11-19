@@ -39,32 +39,32 @@ const Home = ({ onToggleFavorite, isFavorite }) => {
             className="space-y-8"
           >
             {/* Main heading with unique styling */}
-            <div className="relative inline-block">
+            <div className="relative inline-block px-4">
               <motion.h1
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
-                className="font-display text-7xl md:text-9xl text-gradient mb-4"
+                className="font-display text-5xl sm:text-7xl md:text-9xl text-gradient mb-4"
               >
                 Wild & Free
               </motion.h1>
               <motion.div
                 animate={{ rotate: [0, 5, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-8 -right-8 text-6xl"
+                className="absolute -top-4 sm:-top-8 -right-2 sm:-right-8 text-4xl sm:text-6xl"
               >
                 🌸
               </motion.div>
               <motion.div
                 animate={{ rotate: [0, -5, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -bottom-4 -left-8 text-5xl"
+                className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-8 text-3xl sm:text-5xl"
               >
                 🦋
               </motion.div>
             </div>
 
-            <p className="font-script text-4xl md:text-5xl text-dusty-rose-400 max-w-2xl mx-auto">
+            <p className="font-script text-2xl sm:text-4xl md:text-5xl text-dusty-rose-400 max-w-2xl mx-auto px-4">
               Boho-inspired threads for free-spirited little ones
             </p>
 
@@ -188,10 +188,10 @@ const Home = ({ onToggleFavorite, isFavorite }) => {
                       e.preventDefault();
                       onToggleFavorite(product);
                     }}
-                    className="absolute top-4 right-4 z-20 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+                    className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 p-2 sm:p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                     title={isFavorite(product.id) ? "Remove from favorites" : "Add to favorites"}
                   >
-                    <span className="text-2xl">
+                    <span className="text-xl sm:text-2xl">
                       {isFavorite(product.id) ? '❤️' : '🤍'}
                     </span>
                   </motion.button>

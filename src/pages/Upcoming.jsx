@@ -41,10 +41,10 @@ const Upcoming = () => {
           >
             🌙
           </motion.div>
-          <h1 className="font-display text-6xl md:text-7xl text-gradient mb-4">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl text-gradient mb-4">
             Coming Soon
           </h1>
-          <p className="text-xl text-sand-500 font-script">
+          <p className="text-lg sm:text-xl text-sand-500 font-script">
             Magical moments on the horizon
           </p>
         </motion.div>

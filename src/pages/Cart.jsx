@@ -52,12 +52,12 @@ const Cart = ({ cartItems, onUpdateQuantity, onRemoveItem }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
+          className="mb-8 sm:mb-12"
         >
-          <h1 className="font-display text-6xl md:text-7xl text-gradient mb-4">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl text-gradient mb-4">
             Shopping Cart
           </h1>
-          <p className="text-lg text-sand-500">
+          <p className="text-base sm:text-lg text-sand-500">
             {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart
           </p>
         </motion.div>
@@ -109,14 +109,14 @@ const Cart = ({ cartItems, onUpdateQuantity, onRemoveItem }) => {
                       )}
 
                       {/* Quantity and Price */}
-                      <div className="flex items-center justify-between pt-2">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
                         <div className="flex items-center gap-3">
                           <span className="text-sm text-sand-500">Quantity:</span>
-                          <div className="flex items-center gap-2 bg-sand-100 rounded-full px-3 py-1">
+                          <div className="flex items-center gap-2 bg-sand-100 rounded-full px-3 py-1.5">
                             <motion.button
                               whileTap={{ scale: 0.9 }}
                               onClick={() => onUpdateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                              className="w-6 h-6 flex items-center justify-center text-sand-600 hover:text-dusty-rose-500 font-bold"
+                              className="w-8 h-8 flex items-center justify-center text-sand-600 hover:text-dusty-rose-500 font-bold text-lg"
                             >
                               −
                             </motion.button>
@@ -126,7 +126,7 @@ const Cart = ({ cartItems, onUpdateQuantity, onRemoveItem }) => {
                             <motion.button
                               whileTap={{ scale: 0.9 }}
                               onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-                              className="w-6 h-6 flex items-center justify-center text-sand-600 hover:text-dusty-rose-500 font-bold"
+                              className="w-8 h-8 flex items-center justify-center text-sand-600 hover:text-dusty-rose-500 font-bold text-lg"
                             >
                               +
                             </motion.button>
