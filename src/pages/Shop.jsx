@@ -1,12 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { products, categories, ageGroups } from '../data/products';
+import PageTransition from '../components/PageTransition';
+import ProductSkeleton from '../components/ProductSkeleton';
 
-const Shop = ({ onAddToCart }) => {
+const Shop = ({ onAddToCart, onToggleFavorite, isFavorite }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading on initial mount and category change
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [selectedCategory, selectedAgeGroup]);
 
   const filteredProducts = products.filter(product => {
     const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory;
@@ -15,6 +27,7 @@ const Shop = ({ onAddToCart }) => {
   });
 
   return (
+    <PageTransition>
     <div className="min-h-screen py-12 bg-gradient-to-b from-cream-50 to-sand-50">
       {/* Decorative elements */}
       <div className="absolute top-40 right-0 w-96 h-96 bg-gradient-to-br from-lavender-200/20 to-blush-200/20 rounded-blob-1 blur-3xl -z-10" />
@@ -94,7 +107,11 @@ const Shop = ({ onAddToCart }) => {
 
           {/* Products Grid */}
           <div className="flex-1">
-            {filteredProducts.length === 0 ? (
+            {isLoading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <ProductSkeleton count={6} />
+              </div>
+            ) : filteredProducts.length === 0 ? (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -116,27 +133,72 @@ const Shop = ({ onAddToCart }) => {
                   >
                     <div className="bg-white/70 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-shadow">
                       {/* Product Image */}
-                      <div className="relative aspect-square overflow-hidden">
+                      <div className="relative aspect-square overflow-hidden group/image">
                         <motion.img
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ duration: 0.3 }}
+                          whileHover={{ scale: 1.15 }}
+                          transition={{ duration: 0.5, ease: "easeOut" }}
                           src={product.image}
                           alt={product.name}
                           className="w-full h-full object-cover"
                         />
+
+                        {/* Floating Favorite Button */}
+                        <motion.button
+                          whileHover={{ scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onToggleFavorite(product);
+                          }}
+                          className="absolute top-4 right-4 z-20 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+                          title={isFavorite(product.id) ? "Remove from favorites" : "Add to favorites"}
+                        >
+                          <span className="text-2xl">
+                            {isFavorite(product.id) ? '❤️' : '🤍'}
+                          </span>
+                        </motion.button>
+
+                        {/* Hover Overlay with Quick View */}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileHover={{ opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity"
+                        >
+                          <motion.div
+                            initial={{ y: 20, opacity: 0 }}
+                            whileHover={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-center"
+                          >
+                            <p className="text-white text-lg font-semibold mb-2">Quick View</p>
+                            <div className="flex gap-3">
+                              <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
+                                title="View Details"
+                              >
+                                👁️
+                              </motion.button>
+                            </div>
+                          </motion.div>
+                        </motion.div>
+
                         {!product.inStock && (
-                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
                             <span className="bg-white px-4 py-2 rounded-full font-semibold text-sand-600">
                               Out of Stock
                             </span>
                           </div>
                         )}
+
                         {/* Shimmer effect */}
                         <motion.div
                           initial={{ x: '-200%' }}
                           whileHover={{ x: '200%' }}
                           transition={{ duration: 0.6 }}
-                          className="absolute inset-0 shimmer-bg"
+                          className="absolute inset-0 shimmer-bg pointer-events-none"
                         />
                       </div>
 
@@ -186,6 +248,7 @@ const Shop = ({ onAddToCart }) => {
         </div>
       </div>
     </div>
+    </PageTransition>
   );
 };
 

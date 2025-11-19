@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { holidaySales } from '../data/products';
+import PageTransition from '../components/PageTransition';
 
 const Sales = () => {
   const formatDate = (dateString) => {
@@ -26,6 +27,7 @@ const Sales = () => {
   };
 
   return (
+    <PageTransition>
     <div className="min-h-screen py-12 bg-gradient-to-b from-cream-50 via-blush-50 to-lavender-50">
       {/* Animated decorative elements */}
       <motion.div
@@ -266,6 +268,7 @@ const Sales = () => {
         </motion.div>
       </div>
     </div>
+    </PageTransition>
   );
 };
 

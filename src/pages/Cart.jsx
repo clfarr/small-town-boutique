@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import PageTransition from '../components/PageTransition';
 
 const Cart = ({ cartItems, onUpdateQuantity, onRemoveItem }) => {
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -8,6 +9,7 @@ const Cart = ({ cartItems, onUpdateQuantity, onRemoveItem }) => {
 
   if (cartItems.length === 0) {
     return (
+      <PageTransition>
       <div className="min-h-screen py-12 bg-gradient-to-b from-cream-50 to-sand-50 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -38,10 +40,12 @@ const Cart = ({ cartItems, onUpdateQuantity, onRemoveItem }) => {
           </Link>
         </motion.div>
       </div>
+      </PageTransition>
     );
   }
 
   return (
+    <PageTransition>
     <div className="min-h-screen py-12 bg-gradient-to-b from-cream-50 to-sand-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -230,6 +234,7 @@ const Cart = ({ cartItems, onUpdateQuantity, onRemoveItem }) => {
         </div>
       </div>
     </div>
+    </PageTransition>
   );
 };
 

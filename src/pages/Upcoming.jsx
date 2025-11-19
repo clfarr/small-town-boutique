@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { upcomingReleases } from '../data/products';
+import PageTransition from '../components/PageTransition';
 
 const Upcoming = () => {
   const formatDate = (dateString) => {
@@ -20,6 +21,7 @@ const Upcoming = () => {
   };
 
   return (
+    <PageTransition>
     <div className="min-h-screen py-12 bg-gradient-to-b from-cream-50 via-lavender-50 to-blush-50">
       {/* Decorative blobs */}
       <div className="absolute top-20 left-0 w-96 h-96 bg-gradient-to-br from-sage-200/30 to-lavender-200/30 rounded-blob-2 blur-3xl -z-10 animate-blob" />
@@ -227,6 +229,7 @@ const Upcoming = () => {
         </motion.div>
       </div>
     </div>
+    </PageTransition>
   );
 };
 

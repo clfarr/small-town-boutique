@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
@@ -8,8 +8,140 @@ import Upcoming from './pages/Upcoming';
 import Sales from './pages/Sales';
 import Cart from './pages/Cart';
 
+function AnimatedRoutes({ cartItems, handleAddToCart, handleUpdateQuantity, handleRemoveItem, totalItems, handleToggleFavorite, isFavorite }) {
+  const location = useLocation();
+
+  return (
+    <>
+      <Navigation cartCount={totalItems} />
+
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <Home
+                onToggleFavorite={handleToggleFavorite}
+                isFavorite={isFavorite}
+              />
+            }
+          />
+          <Route
+            path="/shop"
+            element={
+              <Shop
+                onAddToCart={handleAddToCart}
+                onToggleFavorite={handleToggleFavorite}
+                isFavorite={isFavorite}
+              />
+            }
+          />
+          <Route path="/upcoming" element={<Upcoming />} />
+          <Route path="/sales" element={<Sales />} />
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cartItems={cartItems}
+                onUpdateQuantity={handleUpdateQuantity}
+                onRemoveItem={handleRemoveItem}
+              />
+            }
+          />
+        </Routes>
+      </AnimatePresence>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-br from-sand-100 via-blush-100 to-lavender-100 py-16 mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            {/* Brand */}
+            <div className="md:col-span-2">
+              <h3 className="font-script text-4xl text-dusty-rose-500 mb-4">
+                Luna & Clover
+              </h3>
+              <p className="text-sand-500 mb-4 max-w-md">
+                Boho-inspired clothing for free-spirited little ones.
+                Made with love, organic materials, and a touch of magic.
+              </p>
+              <div className="flex gap-4">
+                {['🌸', '🌙', '🦋', '✨'].map((icon, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.2, rotate: 10 }}
+                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md cursor-pointer"
+                  >
+                    {icon}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-display text-lg text-sand-600 mb-4">Shop</h4>
+              <ul className="space-y-2 text-sand-500">
+                <li><a href="/shop" className="hover:text-dusty-rose-500">All Products</a></li>
+                <li><a href="/upcoming" className="hover:text-dusty-rose-500">New Arrivals</a></li>
+                <li><a href="/sales" className="hover:text-dusty-rose-500">Sales</a></li>
+              </ul>
+            </div>
+
+            {/* Customer Care */}
+            <div>
+              <h4 className="font-display text-lg text-sand-600 mb-4">Support</h4>
+              <ul className="space-y-2 text-sand-500">
+                <li><a href="#" className="hover:text-dusty-rose-500">Contact Us</a></li>
+                <li><a href="#" className="hover:text-dusty-rose-500">Shipping Info</a></li>
+                <li><a href="#" className="hover:text-dusty-rose-500">Returns</a></li>
+                <li><a href="#" className="hover:text-dusty-rose-500">Size Guide</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-sand-300 pt-8 text-center text-sand-400 text-sm">
+            <p>© 2025 Luna & Clover. Made with 💜 for little dreamers.</p>
+            <p className="mt-2">A portfolio project by Carrie Farr</p>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}
+
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    // Load favorites from localStorage on initial render
+    const savedFavorites = localStorage.getItem('lunaCloverFavorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
+  // Save favorites to localStorage whenever they change
+  const handleToggleFavorite = (product) => {
+    setFavorites(prevFavorites => {
+      const isFavorite = prevFavorites.some(item => item.id === product.id);
+      let newFavorites;
+
+      if (isFavorite) {
+        // Remove from favorites
+        newFavorites = prevFavorites.filter(item => item.id !== product.id);
+        showToast('Removed from favorites 💔');
+      } else {
+        // Add to favorites
+        newFavorites = [...prevFavorites, product];
+        showToast('Added to favorites ❤️');
+      }
+
+      // Save to localStorage
+      localStorage.setItem('lunaCloverFavorites', JSON.stringify(newFavorites));
+      return newFavorites;
+    });
+  };
+
+  const isFavorite = (productId) => {
+    return favorites.some(item => item.id === productId);
+  };
 
   const handleAddToCart = (product) => {
     setCartItems(prevItems => {
@@ -79,82 +211,15 @@ function App() {
         </div>
 
         <div className="relative z-10">
-          <Navigation cartCount={totalItems} />
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/shop"
-            element={<Shop onAddToCart={handleAddToCart} />}
+          <AnimatedRoutes
+            cartItems={cartItems}
+            handleAddToCart={handleAddToCart}
+            handleUpdateQuantity={handleUpdateQuantity}
+            handleRemoveItem={handleRemoveItem}
+            totalItems={totalItems}
+            handleToggleFavorite={handleToggleFavorite}
+            isFavorite={isFavorite}
           />
-          <Route path="/upcoming" element={<Upcoming />} />
-          <Route path="/sales" element={<Sales />} />
-          <Route
-            path="/cart"
-            element={
-              <Cart
-                cartItems={cartItems}
-                onUpdateQuantity={handleUpdateQuantity}
-                onRemoveItem={handleRemoveItem}
-              />
-            }
-          />
-          </Routes>
-
-          {/* Footer */}
-          <footer className="bg-gradient-to-br from-sand-100 via-blush-100 to-lavender-100 py-16 mt-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-              {/* Brand */}
-              <div className="md:col-span-2">
-                <h3 className="font-script text-4xl text-dusty-rose-500 mb-4">
-                  Luna & Clover
-                </h3>
-                <p className="text-sand-500 mb-4 max-w-md">
-                  Boho-inspired clothing for free-spirited little ones.
-                  Made with love, organic materials, and a touch of magic.
-                </p>
-                <div className="flex gap-4">
-                  {['🌸', '🌙', '🦋', '✨'].map((icon, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ scale: 1.2, rotate: 10 }}
-                      className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md cursor-pointer"
-                    >
-                      {icon}
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h4 className="font-display text-lg text-sand-600 mb-4">Shop</h4>
-                <ul className="space-y-2 text-sand-500">
-                  <li><a href="/shop" className="hover:text-dusty-rose-500">All Products</a></li>
-                  <li><a href="/upcoming" className="hover:text-dusty-rose-500">New Arrivals</a></li>
-                  <li><a href="/sales" className="hover:text-dusty-rose-500">Sales</a></li>
-                </ul>
-              </div>
-
-              {/* Customer Care */}
-              <div>
-                <h4 className="font-display text-lg text-sand-600 mb-4">Support</h4>
-                <ul className="space-y-2 text-sand-500">
-                  <li><a href="#" className="hover:text-dusty-rose-500">Contact Us</a></li>
-                  <li><a href="#" className="hover:text-dusty-rose-500">Shipping Info</a></li>
-                  <li><a href="#" className="hover:text-dusty-rose-500">Returns</a></li>
-                  <li><a href="#" className="hover:text-dusty-rose-500">Size Guide</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="border-t border-sand-300 pt-8 text-center text-sand-400 text-sm">
-              <p>© 2025 Luna & Clover. Made with 💜 for little dreamers.</p>
-              <p className="mt-2">A portfolio project by Carrie Farr</p>
-            </div>
-          </div>
-          </footer>
         </div>
       </div>
     </Router>

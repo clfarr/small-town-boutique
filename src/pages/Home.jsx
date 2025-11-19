@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { products } from '../data/products';
+import PageTransition from '../components/PageTransition';
 
-const Home = () => {
+const Home = ({ onToggleFavorite, isFavorite }) => {
   const featuredProducts = products.filter(p => p.featured).slice(0, 4);
 
   return (
+    <PageTransition>
     <div className="min-h-screen">
       {/* Hero Section with Organic Shapes */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
@@ -142,23 +144,59 @@ const Home = () => {
                 whileHover={{ y: -10 }}
                 className="group cursor-pointer"
               >
+                <div className="relative">
+                  <Link to={`/product/${product.id}`}>
+                    <div className="relative overflow-hidden rounded-3xl aspect-square mb-4 shadow-lg group-hover:shadow-2xl transition-shadow group/image">
+                      <motion.img
+                        whileHover={{ scale: 1.15 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+
+                      {/* Hover Overlay */}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity duration-300"
+                      >
+                        <motion.div
+                          initial={{ y: 20, opacity: 0 }}
+                          whileHover={{ y: 0, opacity: 1 }}
+                          transition={{ delay: 0.1 }}
+                          className="text-white text-lg font-semibold"
+                        >
+                          View Product ✨
+                        </motion.div>
+                      </motion.div>
+
+                      {/* Shimmer effect on hover */}
+                      <motion.div
+                        initial={{ x: '-200%' }}
+                        whileHover={{ x: '200%' }}
+                        transition={{ duration: 0.6 }}
+                        className="absolute inset-0 shimmer-bg pointer-events-none"
+                      />
+                    </div>
+                  </Link>
+
+                  {/* Floating Favorite Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onToggleFavorite(product);
+                    }}
+                    className="absolute top-4 right-4 z-20 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+                    title={isFavorite(product.id) ? "Remove from favorites" : "Add to favorites"}
+                  >
+                    <span className="text-2xl">
+                      {isFavorite(product.id) ? '❤️' : '🤍'}
+                    </span>
+                  </motion.button>
+                </div>
                 <Link to={`/product/${product.id}`}>
-                  <div className="relative overflow-hidden rounded-3xl aspect-square mb-4 shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <motion.img
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
-                    {/* Shimmer effect on hover */}
-                    <motion.div
-                      initial={{ x: '-200%' }}
-                      whileHover={{ x: '200%' }}
-                      transition={{ duration: 0.6 }}
-                      className="absolute inset-0 shimmer-bg"
-                    />
-                  </div>
                   <h3 className="font-display text-2xl text-sand-600 mb-2 group-hover:text-dusty-rose-500 transition-colors">
                     {product.name}
                   </h3>
@@ -268,6 +306,7 @@ const Home = () => {
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 };
 
